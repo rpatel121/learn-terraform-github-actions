@@ -11,12 +11,10 @@ terraform {
   }
   required_version = "~> 1.0"
 
-  backend "remote" {
-    organization = "rpatel-terraform-Labs"
+  backend "s3" {
+    bucket = "my-terraform-bucket-gitaction2121"
+    region = "us-east-1"
 
-    workspaces {
-      name = "demo-github-actions"
-    }
   }
 }
 
@@ -30,7 +28,7 @@ provider "aws" {
 resource "random_pet" "sg" {}
 
 resource "aws_instance" "web" {
-  ami                    = "ami-09e67e426f25ce0d7"
+  ami                    = "ami-08a52ddb321b32a8c"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
